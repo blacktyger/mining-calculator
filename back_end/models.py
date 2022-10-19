@@ -162,7 +162,7 @@ class Calculator(BaseModel):
         currency_rig_profit = currency_yield_value - self.energy_cost()['value']
         return {'symbol': self.currency.symbol, 'value': currency_rig_profit}
 
-    def get_report(self):
+    def get_report(self, as_dict: bool = True):
         raw_yield = self.raw_yield()
         data = {
             'rig': self.rig,
@@ -180,15 +180,22 @@ class Calculator(BaseModel):
             'yield_value': self.income()['value'],
             }
 
-        return Report(**data).dict(exclude={'blockchain'})
+        if as_dict:
+            return Report(**data).dict(exclude={'blockchain'})
+        else:
+            return Report(**data)
 
 
 class Parser(BaseModel):
     """Help to parse string queries"""
-    query: str | None = Field(..., title="Query message to parse hashrate from.")
-    algo: str | None = Field(None, title="Parsed PoW Algorithm")
+    query: str | None = Field(None, title="Query message to parse hashrate from.")
     unit: str | None = Field(None, title="Parsed Hashrate Unit")
-    hashrate: int | float | None = Field(None, title="Parsed Hashrate in H/s")
+    pool_fee: int | None = Field(0, title="Mining Pool fee in %")
+    hashrate: int | None = Field(None, title="Parsed Hashrate in H/s")
+    currency: str | None = Field(None, title="Parsed Currency")
+    algorithm: str | None = Field(None, title="Parsed PoW Algorithm")
+    consumption: float | int = Field(None, title="Parsed Energy Consumption in Watts")
+    energy: float | int = Field(None, title="Parsed Energy Unit Price in Currency")
 
     _PATTERNS = {
         'mining_algorithms': {
@@ -244,6 +251,12 @@ class Parser(BaseModel):
 
     def get_hashrate(self):
         """Find rig hashrate given by user and return it"""
+        if isinstance(self.hashrate, int) and self.hashrate > 1:
+            self.unit = 'hash'
+            print(f'{self.hashrate} provided in H/s')
+            print(self)
+            return
+
         pat = re.compile(r"\d*\.?\d+|[-+]?\d+")
         temp_hashrate = list(filter(pat.match, self.query))
 

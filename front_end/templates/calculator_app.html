@@ -1,0 +1,173 @@
+<div class="container p-4">
+    <div class="row justify-content-center">
+        <div class="div col-sm-12 col-md-8 col-lg-6">
+            <div class="card bg-dark p-3">
+                <div class="card-header text-center">
+                    <img alt='logo' height="90px" class="img-responsive mb-4" src="https://epic.tech/img/epic-cash-logo.png" />
+                    <h1 class="card-title text-white">Mining Calculator</h1>
+                </div>
+                <form class="form" method="post">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25" id="basic-addon1" >Hashrate</span>
+                        <input type="number" class="form-control" required value="1000" id="hashrate"
+                               aria-label="Rig Hashrate" aria-describedby="basic-addon2" name="hashrate">
+                        <span class="input-group-text" id="basic-addon2">H/s</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text w-25" for="algorithm">Algorithm</label>
+                            <select class="form-select" id="algorithm" name="algorithm">
+                            <option selected value="randomx">RandomX (CPU)</option>
+                            <option value="progpow">ProgPoW (GPU)</option>
+                            <option value="cuckoo">Cuckoo (ASIC)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text w-25" id="basic-addon1" >Energy Cons.</span>
+                            <input type="number" required class="form-control" placeholder="200W" id="consumption"
+                                   name="consumption" aria-label="consumption" aria-describedby="basic-addon2"
+                                   step="0.5" value="0">
+                            <span class="input-group-text" id="basic-addon2">Watt</span>
+                        </div>
+                    </div>
+
+                    <hr class="text-white" />
+
+                    <div class="fs-6 text-white-50 my-2">Costs</div>
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text w-50" id="basic-addon1" >Energy Unit Price</span>
+                            <input type="number" required class="form-control" placeholder="0.30" id="energy"
+                                   name="energy" aria-label="energy" aria-describedby="basic-addon2" step="0.01" value="0">
+                            <span class="input-group-text" id="basic-addon2">kWh</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text w-50" for="currency">Currency</label>
+                                <select class="form-select" id="currency" name="currency">
+                                <option selected value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="PLN">PLN</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text w-50" id="basic-addon1" >Pool fee</span>
+                            <input type="number" required class="form-control" placeholder="0" id="pool_fee" name="pool_fee"
+                                   aria-label="Pool Fee" aria-describedby="basic-addon2" step="0.1" value="0">
+                            <span class="input-group-text" id="basic-addon2">%</span>
+                        </div>
+                    </div>
+
+                    <input type="button" class="btn btn-outline-success w-100 my-3"
+                           onclick="submitForm()" value="Calculate">
+                </form>
+
+                <div class="card mt-5">
+                    <span id="responseArea"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    function submitForm() {
+        const consumption = document.getElementById("consumption").value;
+        const algorithm = document.getElementById("algorithm").value;
+        const hashrate = document.getElementById("hashrate").value;
+        const currency = document.getElementById("currency").value;
+        const pool_fee = document.getElementById("pool_fee").value;
+        const energy = document.getElementById("energy").value;
+
+
+        const body = {
+            "hashrate": hashrate,
+            "algorithm": algorithm,
+            "currency": currency,
+            "pool_fee": pool_fee,
+            "energy": energy,
+            "consumption": consumption
+           }
+        console.log(body)
+        console.log(JSON.stringify(body))
+
+        fetch('/calculate', {
+            method: 'POST',
+            headers: {'Accept': 'application/json',
+                     'Content-Type': 'application/json'},
+            body: JSON.stringify(body),
+            })
+            .then(resp => resp.text())  // or, resp.json(), etc.
+            .then(data => {document.getElementById("responseArea").innerHTML = data})
+            .catch(error => {console.error(error)});
+    }
+    {##}
+    {#$("#calculate_form").submit(function( event ) {#}
+    {#    const hashrate = document.getElementById("hashrate").value;#}
+    {#    const algorithm = document.getElementById("algorithm").value;#}
+    {#    const currency = document.getElementById("currency").value;#}
+    {#    const pool_fee = document.getElementById("pool_fee").value;#}
+    {##}
+    {#    const body = {#}
+    {#           "hashrate": hashrate,#}
+    {#           "algorithm": algorithm,#}
+    {#           "currency": currency,#}
+    {#           "pool_fee": pool_fee#}
+    {#       }#}
+    {#  console.log(body)#}
+    {##}
+    {#  $.ajax({#}
+    {#        url: "/calculate",#}
+    {#        type: "post",#}
+            {#dataType: "json",#}
+            {#contentType: "application/json",#}
+    {#        body: body,#}
+    {#        success: function(body) {#}
+    {#            console.log("success");#}
+    {#        },#}
+    {##}
+    {#    });#}
+    {##}
+    {#});#}
+
+
+</script>
+{##}
+{##}
+{#<div class="input-group mb-3">#}
+{#    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>#}
+{#    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">#}
+{#</div>#}
+{##}
+{#<label for="basic-url" class="form-label">Your vanity URL</label>#}
+{#<div class="input-group mb-3">#}
+{#  <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>#}
+{#  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">#}
+{#</div>#}
+{##}
+{#<div class="input-group mb-3">#}
+{#  <span class="input-group-text">$</span>#}
+{#  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">#}
+{#  <span class="input-group-text">.00</span>#}
+{#</div>#}
+{##}
+{#<div class="input-group mb-3">#}
+{#  <input type="text" class="form-control" placeholder="Username" aria-label="Username">#}
+{#  <span class="input-group-text">@</span>#}
+{#  <input type="text" class="form-control" placeholder="Server" aria-label="Server">#}
+{#</div>#}
+{##}
+{#<div class="input-group">#}
+{#  <span class="input-group-text">With textarea</span>#}
+{#  <textarea class="form-control" aria-label="With textarea"></textarea>#}
+{#</div>#}
