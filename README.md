@@ -124,5 +124,5 @@ Support and donation are welcome, more details via Telegram: [**@blacktyg3r**](h
     - ```vite_d3f478a11bb149c4d140ea29dbfceba5b5315c04561d355c12```
 
 ---
-[epic.tech](https://epic.tech) @ 2022
+Developed by [BT LABS](https://blacktyg3r.com) @ 2023
 
