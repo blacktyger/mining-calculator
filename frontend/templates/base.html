@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='/img/icons/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='/img/icons/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='/img/icons/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ url_for('static', path='/img/icons/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ url_for('static', path='/img/icons/safari-pinned-tab.svg') }}" color="#5bbad5">
+
+        <meta name="msapplication-TileColor" content="#fbfbfb">
+        <meta name="theme-color" content="#ffffff">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{{ url_for('static', path='/cdns/5.0.2_dist_css_bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', path='/style_n.css') }}" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/d60f5a0aa7.js" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', path='/cdns/11.6.5_dist_sweetalert2.all.js') }}"></script>
+        <script src="{{ url_for('static', path='/cdns/jquery-3.6.1.slim.js') }}"> </script>
+
+        <title>Easy Miner: Calculator</title>
+    </head>
+    <body class="p-0 m-0">
+        {%  include '/navbar.html' %}
+
+        <section class="p-1 my-2">
+            {% block body %} {% endblock %}
+        </section>
+
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="{{ url_for('static', path='/cdns/5.0.2_dist_js_bootstrap.bundle.js') }}"></script>
+    </body>
+
+</html>

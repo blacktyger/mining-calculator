@@ -1,0 +1,124 @@
+<table class="table text-white-50 mb-3 align-middle">
+    <thead>
+        <tr>
+            <th class="fw-normal">
+                <small id="resultSpinner">
+                    <span class="material-icons mb-1 fs-6 gearIcon">memory</span>
+                    <span class="hashrate">{{ example_rig.hashrate }}</span>
+                    <span class="hashrateUnits">{{ example_rig.units }}</span>
+                </small>
+            </th>
+            <th class="fw-normal text-end">1 DAY</th>
+            <th class="fw-normal text-end">1 WEEK</th>
+                        <td class="text-end"></td>
+
+            <th class="text-end">
+                <img src="{{ url_for('static', path='img/flags/us.svg') }}"
+                     alt='currency-flag' class="flag-icon m-0 rounded" height="20">
+            </th>
+        </tr>
+    </thead>
+    <tbody class="text-white">
+        <tr>
+            <td class="fw-normal text-white-50">INCOME</td>
+            <td class="text-end" id="result-income-1"></td>
+            <td class="text-end" id="result-income-7"></td>
+                        <td class="text-end"></td>
+
+            <td class="text-end" style="width: 15%">EPIC</td>
+        </tr>
+        <tr>
+            <td class="fw-normal text-white-50">COSTS</td>
+            <td class="text-end" id="result-costs-1"></td>
+            <td class="text-end" id="result-costs-7"></td>
+                        <td class="text-end"></td>
+
+            <td class="text-end" style="width: 15%"><span class="currency-symbol">USD</span></td>
+        </tr>
+        <tr>
+            <td class="fw-normal text-white-50">PROFIT</td>
+            <td class="text-end" id="result-profit-1"></td>
+            <td class="text-end" id="result-profit-7"></td>
+            <td class="text-end"></td>
+            <td class="text-end" style="width: 15%"><span class="currency-symbol">USD</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-6" onClick="toast('Sharing reports available soon..')">
+        <button disabled class="btn btn-sm bg-green btn-secondary w-100 border-0 py-0">
+            <div class="row mt-1">
+                <div class="col-8">SHARE</div>
+                <div class="col-4 text-end">
+                    <span class="material-icons mb-1 text-end">share</span>
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <div class="col-6" onClick="toast('Detailed reports available soon..')">
+        <button disabled class="btn btn-sm bg-blue btn-secondary w-100 border-0 py-0">
+            <div class="row mt-1">
+                <div class="col-8">FULL REPORT</div>
+                <div class="col-4 text-end">
+                    <span class="material-icons mb-1 text-end">description</span>
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
+
+
+{# FULL REPORT TAB #}
+
+{#<table class="table text-white-50 mb-3 align-middle">#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th></th>#}
+{#            <th class="fw-normal text-start">INCOME</th>#}
+{#            <th class="fw-normal">COSTS</th>#}
+{#            <th class="fw-normal text-end">PROFIT</th>#}
+{#            <th class="text-end">#}
+{#                <img src="{{ url_for('static', path='img/flags/us.svg') }}"#}
+{#                     alt='currency-flag' class="flag-icon m-0 rounded" height="20" />#}
+{#            </th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <tbody class="text-white">#}
+{#        <tr>#}
+{#            <td class="fw-normal text-white-50">1 HOUR</td>#}
+{#            <td class="text-start text-income" id="result-income-1h">#}
+{#                0.03454#}
+{#            </td>#}
+{#            <td class="text-start text-costs">#}
+{#                <p class="m-0 p-0" id="result-cost-elect-1h"><small>#}
+{#                    <span class="material-icons fs-6">bolt</span>#}
+{#                    0.0002#}
+{#                </small></p>#}
+{#                <p class="m-0 p-0" id="result-cost-pool-1h"><small>#}
+{#                    <span class="material-icons fs-6">paid</span>#}
+{#                    0.0001#}
+{#                </small></p>#}
+{##}
+{#            </td>#}
+{#            <td class="text-end text-profit">#}
+{#                0.03001#}
+{#            </td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#            <td class="fw-normal text-white-50">1 DAY</td>#}
+{#            <td class="" id="result-costs-1d">0.94358</td>#}
+{#            <td class="" id="result-costs-7"></td>#}
+{#            <td class="text-end" style="width: 15%"></td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#            <td class="fw-normal text-white-50">1 WEEK</td>#}
+{#            <td class="" id="result-profit-1w">6.45663</td>#}
+{#            <td class="" id="result-profit-7"></td>#}
+{#            <td class="text-end" style="width: 15%"><span class="currency-symbol">USD</span></td>#}
+{#        </tr>#}
+{#    </tbody>#}
+{#</table>#}

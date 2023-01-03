@@ -1,0 +1,79 @@
+
+<div class="row text-white-50">
+    <div class="col-6">
+        <span class="material-icons mb-1">calculate</span>
+        Algorithm
+    </div>
+    <div class="col-4">
+        <span class="material-icons mb-1 gearIcon">memory</span>
+        <span class="gearType">CPU</span>
+        <sup class="material-icons mb-1 fs-6" data-bs-toggle="tooltip" data-bs-placement="top"
+             data-bs-custom-class="custom-tooltip" data-bs-html="true"
+             data-bs-title="Optional, value of <b>Hashrate</b> and <b>Power Consumption</b> is estimated.">
+            help
+        </sup>
+    </div>
+    <div class="col-2 ps-0 text-end">
+        <sup class="p-0">
+            <a href="#" onClick="toast('More hardware available soon..')">
+                More<span class="text-success fs-5">+</span>
+            </a>
+        </sup>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-6">
+        <div class="input-group">
+            <select class="form-select" id="algorithmSelect" name="algorithm">
+                <option selected value="randomx">RandomX</option>
+                <option value="progpow">ProgPoW</option>
+                <option value="cuckoo">Cuckoo</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="input-group" id="random">
+            <select class="form-select" id="gearSelect" name="gear">
+                <option value="no_id">Custom</option>
+                {% for gear in hardware.randomx %}
+                    <option value="{{ gear.gear_id }}">{{ gear.make }} {{ gear.model }}</option>
+                {%  endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row text-white-50">
+    <div class="col-6">
+        <span class="material-icons mb-1">tag</span>
+        Hashrate
+    </div>
+    <div class="col-6">
+        <span class="material-icons mb-1">electrical_services</span>
+        Power
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="input-group">
+            <input type="number" class="form-control" required value="{{ example_rig.hashrate }}" id="hashrate"
+                   aria-label="Rig Hashrate" aria-describedby="basic-addon2"
+                   name="hashrate" step="0.1">
+            <span class="input-group-text input-end" id="basic-addon2">
+                <small class="hashrateUnits">{{ example_rig.units }}</small>
+            </span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="input-group">
+            <input type="number" required class="form-control" placeholder="200W" id="consumption"
+                   name="consumption" aria-label="consumption" aria-describedby="basic-addon2"
+                   step="0.5" value="{{ example_rig.power }}">
+            <span class="input-group-text input-end" id="basic-addon2">
+                <small>Watt</small>
+            </span>
+        </div>
+    </div>
+</div>

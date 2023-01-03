@@ -1,0 +1,41 @@
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-6">
+
+            <div class="card card-drag bg-dark shadow-md border-0 rounded-2" >
+
+                 <div class="row py-2 px-2 mx-0 rounded-top bg-green">
+                    <div class="col-10 mt-1 text-start h2 text-light">
+                        Profitability Calculator
+                    </div>
+                 </div>
+                
+                <div class="card-body mt-2">
+
+                    {#  RIG SETUP  #}
+                    {%  include 'calculator/include_rig.html' %}
+                    <hr class="text-muted my-3"/>
+
+                    {#  COSTS SETUP  #}
+                    {%  include 'calculator/include_costs.html' %}
+                    <hr class="text-muted my-3"/>
+
+                    {#  Calculations Result #}
+                    {%  include 'calculator/include_results.html' %}
+
+                </div>
+
+                <div class="card-footer text-center">
+                    <div class="small text-muted mt-0">Powered by
+                        <a target="_blank" class="mx-1" href="https://epic-radar.com/api">EPIC-RADAR<sup><small>TM</small></sup></a>
+                        | <a class="mx-1" href="https://blacktyg3r.com" target="_blank">blacktyg3r.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', path='/scripts/calculator/scripts.js') }}"></script>
+<script src="{{ url_for('static', path='/scripts/calculator/input_listeners.js') }}"></script>
+
