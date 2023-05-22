@@ -114,6 +114,5 @@ async def calculate(parser: Parser):
 
     return response
 
-
 if __name__ == "__main__":
-    uvicorn.run("main:app")
+    uvicorn.run("main:app", port=8054)
