@@ -51,7 +51,7 @@ class Blockchain(BaseModel):
 
 
 class Currency(BaseModel):
-    symbol: Union[str, None] = Field('USD', title='Base currency used fin calculations.')
+    symbol: Union[str, None] = Field('USD', title='Base currency used in calculations.')
     btc_price: Union[float, None] = Field(..., title='Price in base currency for 1 BTC.')
     epic_price: Union[float, None] = Field(..., title='Price in base currency for 1 EPIC.')
 
@@ -227,6 +227,7 @@ class Parser(BaseModel):
         if self.algorithm: return
 
         algo = None
+
         if any(x in query for x in self._PATTERNS['mining_algorithms']['progpow']):
             algo = 'progpow'
         if any(x in query for x in self._PATTERNS['mining_algorithms']['randomx']):

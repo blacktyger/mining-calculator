@@ -10,6 +10,11 @@ import json
 
 import requests
 
+from .cache import cache
+
+
+CACHE_FILE = ".cache"
+
 
 class MarketData:
     """
@@ -19,6 +24,7 @@ class MarketData:
     btc_feed_url = "https://blockchain.info"
     epic_feed_url = "https://api.coingecko.com/api/v3"
 
+    @cache(ttl=60*3)
     def price_epic_vs(self, currency: str):
         symbol = currency.upper()
         if len(symbol) == 3:
@@ -30,6 +36,7 @@ class MarketData:
                 print(er)
                 return 0
 
+    @cache(ttl=60*3)
     def price_btc_vs(self, currency: str):
         symbol = currency.upper()
         if len(symbol) == 3:
@@ -46,6 +53,7 @@ class MarketData:
                 'btc_price': self.price_btc_vs(currency),
                 'symbol': currency.upper()}
 
+    @cache(ttl=60*5)
     def currency_to_btc(self, value: Union[Decimal, float, int], currency: str):
         """Find bitcoin price in given currency"""
         symbol = currency.upper()
@@ -83,6 +91,7 @@ class BlockchainData:
         except ConnectionResetError:
             return None
 
+    @cache(ttl=60)
     def get_live_block(self):
         payload = b'{"id":"0","jsonrpc":"2.0","method":"getjobtemplate",' \
                   b'"params":{"algorithm":"progpow"}}'
@@ -95,6 +104,7 @@ class BlockchainData:
 
             return data['params']
 
+    @cache(ttl=60)
     def get_last_block(self):
         response = requests.get(f"{self.API_URL}{self.API_GET_BLOCKS}")
         blocks = response.json()
